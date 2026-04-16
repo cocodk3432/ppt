@@ -1,29 +1,104 @@
-{
-  "name": "ppt",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "jszip": "^3.10.1",
-    "pptxviewjs": "^1.1.9",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "eslint": "^9.39.4",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.4.0",
-    "vite": "^8.0.1"
-  }
+<!DOCTYPE html>  / /gogole ana
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Full GA4 Tracking Example</title>
+
+<!-- GA4 Global Site Tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CVQWXDXF2G"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+
+gtag('js', new Date());
+
+gtag('config', 'G-CVQWXDXF2G', {
+  send_page_view: true
+});
+</script>
+
+<style>
+body { font-family: Arial; text-align: center; height: 2000px; }
+.product {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin: 15px;
+  width: 220px;
+  display: inline-block;
 }
+button {
+  padding: 8px;
+  background: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h2>My Online Store</h2>
+
+<div class="product">
+<h3>Smart Watch</h3>
+<p>₹2500</p>
+<button onclick="addToCart('SW01','Smart Watch',2500)">Add to Cart</button>
+</div>
+
+<div class="product">
+<h3>Bluetooth Speaker</h3>
+<p>₹1800</p>
+<button onclick="addToCart('BS02','Bluetooth Speaker',1800)">Add to Cart</button>
+</div>
+
+<div class="product">
+<h3>Wireless Earbuds</h3>
+<p>₹3200</p>
+<button onclick="addToCart('WE03','Wireless Earbuds',3200)">Add to Cart</button>
+</div>
+
+<div class="product">
+<h3>Fitness Band</h3>
+<p>₹1500</p>
+<button onclick="addToCart('FB04','Fitness Band',1500)">Add to Cart</button>
+</div>
+
+<script>
+
+// Ensure page fully loads before firing events
+window.addEventListener('load', function () {
+
+  // Track product impressions
+  gtag('event', 'view_item_list', {
+    item_list_name: 'Homepage Products',
+    items: [
+      { item_id: 'SW01', item_name: 'Smart Watch', price: 2500 },
+      { item_id: 'BS02', item_name: 'Bluetooth Speaker', price: 1800 },
+      { item_id: 'WE03', item_name: 'Wireless Earbuds', price: 3200 },
+      { item_id: 'FB04', item_name: 'Fitness Band', price: 1500 }
+    ]
+  });
+
+});
+
+function addToCart(id, name, price) {
+
+  gtag('event', 'add_to_cart', {
+    currency: 'INR',
+    value: price,
+    items: [{
+      item_id: id,
+      item_name: name,
+      price: price,
+      quantity: 1
+    }]
+  });
+
+  alert(name + " added to cart!");
+}
+
+</script>
+
+</body>
+</html>
